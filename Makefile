@@ -19,3 +19,7 @@ install: env
 	@pip install -r requirements.txt
 	@echo "Packages are installed...🎉"
 
+image:
+	@docker build -t voter-app:0.0.1 .
+	@echo "Docker image built...😎"
+
