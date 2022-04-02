@@ -15,6 +15,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
 
+
 @app.post("/", response_class=HTMLResponse)
 @app.get("/", response_class=HTMLResponse)
 async def render_voter(request: Request):
@@ -27,15 +28,15 @@ async def render_voter(request: Request):
     vote = form.get("vote")
     logger.info(f"{voter_id} -> {vote}")
     response = templates.TemplateResponse(
-            "index.html",
-            {
-                "request": request,
-                "hostname": request.client.host,
-                "option_a": option_a,
-                "option_b": option_b,
-                "vote": vote
-                }
-            )
+        "index.html",
+        {
+            "request": request,
+            "hostname": request.client.host,
+            "option_a": option_a,
+            "option_b": option_b,
+            "vote": vote
+        }
+    )
     response.set_cookie('voter_id', voter_id)
 
     return response
